@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="titles">
+        <item>Staff</item>
+        <item>Devices</item>
+        <item>Cars</item>
+    </string-array>
+
 </resources>

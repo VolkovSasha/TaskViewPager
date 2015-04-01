@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- DIMENS -->
+    <dimen name="dim_padding">2dp</dimen>
+    <dimen name="dim_margin_tv">2dp</dimen>
+    <dimen name="dim_card_width">320dp</dimen>
+    <dimen name="dim_card_height">200dp</dimen>
+    <!-- end region -->
+
+    <!-- COLORS -->
+    <color name="my_transp">#CC000000</color>
+    <color name="my_silver">#C0C0C0</color>
+    <color name="my_night">#000000</color>
+    <color name="my_white">#FFFFFF</color>
+    <!-- end region -->
+
+    <!-- STYLES -->
+    <style name="DIMImageStyle">
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="DIMTextViewStyle">
+        <item name="android:layout_margin">@dimen/dim_margin_tv</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">@dimen/dim_padding</item>
+        <item name="android:textColor">@color/my_white</item>
+    </style>
+
+    <style name="DIMLinerStyle">
+        <item name="android:background">@color/my_transp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+    <!-- end region -->
+
+</resources>

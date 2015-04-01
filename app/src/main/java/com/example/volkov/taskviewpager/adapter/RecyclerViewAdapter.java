@@ -27,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context                         mContext;
     private final int                       mScreenSize, mScreenSizeY;
     private OnSwipeListener                 mSwipeListener = null;
-    private OnScrollListener mScrollListener = null;
+    private OnScrollListener                mScrollListener = null;
 
     public RecyclerViewAdapter(Context _context, List<ListModel> _listModel){
         mListModel          = _listModel;
@@ -83,10 +83,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     private void checkY(float y){
-        if (y > (mScreenSizeY * 0.8f) && y < mScreenSizeY){
+        if (y > (mScreenSizeY * 0.7f) && y < mScreenSizeY){
             if (mScrollListener != null)
                 mScrollListener.onScroll(OnScrollListener.SCROLL_DOWN);
-        } else if (y < (mScreenSizeY * 0.2f) && y > 0)
+        } else if (y < (mScreenSizeY * 0.3f) && y > 0)
             if (mScrollListener != null)
                 mScrollListener.onScroll(OnScrollListener.SCROLL_UP);
     }

@@ -85,6 +85,7 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
                     case OnScrollListener.SCROLL_UP:
                         Log.w("SCROLL", "UP");
                         mRV.smoothScrollBy(0, - 100);
+
                         break;
                     case OnScrollListener.SCROLL_DOWN:
                         Log.w("SCROLL", "DOWN");

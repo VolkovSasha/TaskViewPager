@@ -16,7 +16,6 @@ import com.example.volkov.taskviewpager.R;
 import com.example.volkov.taskviewpager.global.Constants;
 import com.example.volkov.taskviewpager.global.Variables;
 import com.example.volkov.taskviewpager.model.ListModel;
-import com.example.volkov.taskviewpager.widget.OnScrollListener;
 import com.example.volkov.taskviewpager.widget.OnSwipeListener;
 import com.squareup.picasso.Picasso;
 
@@ -25,17 +24,10 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private List<ListModel>                 mListModel;
     private Context                         mContext;
-    private final int                       mScreenSize, mScreenSizeY;
-    private OnSwipeListener                 mSwipeListener = null;
-    private OnScrollListener                mScrollListener = null;
 
     public RecyclerViewAdapter(Context _context, List<ListModel> _listModel){
         mListModel          = _listModel;
         mContext            = _context;
-        Point mPoint        = new Point();
-        ((Activity)mContext).getWindowManager().getDefaultDisplay().getSize(mPoint);
-        mScreenSize         = mPoint.x;
-        mScreenSizeY        = mPoint.y;
     }
 
     public void addItem(int position, ListModel model) {
@@ -64,33 +56,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mListModel.size();
     }
 
-    public void setOnSwipeListener(OnSwipeListener listener) {
-        mSwipeListener = listener;
-    }
-
-    public void setOnScrollListener(OnScrollListener listener){
-        mScrollListener = listener;
-    }
-
-    private void checkX(float x) {
-        if(x > (mScreenSize * 0.8f) && x < mScreenSize) {
-            if (mSwipeListener != null)
-                mSwipeListener.onSwipe(OnSwipeListener.SWIPE_RIGHT);
-        } else if(x < (mScreenSize * 0.2f) && x > 0) {
-            if(mSwipeListener != null)
-                mSwipeListener.onSwipe(OnSwipeListener.SWIPE_LEFT);
-        }
-    }
-
-    private void checkY(float y){
-        if (y > (mScreenSizeY * 0.7f) && y < mScreenSizeY){
-            if (mScrollListener != null)
-                mScrollListener.onScroll(OnScrollListener.SCROLL_DOWN);
-        } else if (y < (mScreenSizeY * 0.3f) && y > 0)
-            if (mScrollListener != null)
-                mScrollListener.onScroll(OnScrollListener.SCROLL_UP);
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivImage;
         public TextView tvOne, tvTwo;
@@ -117,31 +82,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnDragListener(new View.OnDragListener() {
                 @Override
                 public boolean onDrag(View v, DragEvent event) {
-                    float x = event.getX();
-                    float y = event.getY() + v.getTop();
-                    Log.i("DRAG", "y="+y);
-                    if(Variables.DRAG_OBJECT != null) {
-                        checkX(x);
-                        checkY(y);
-                    }
                     switch (event.getAction()) {
                         case DragEvent.ACTION_DRAG_STARTED:
+                            return true;
                         case DragEvent.ACTION_DRAG_ENTERED:
+                            return true;
                         case DragEvent.ACTION_DRAG_EXITED:
-
-                            break;
+                            return true;
                         case DragEvent.ACTION_DROP:
                             ListModel model = Variables.DRAG_OBJECT;
                             Log.w(RecyclerViewAdapter.class.getName(), "DRAG END: " + model.getTitle());
                             addItem(getPosition(), model);
                             Variables.DRAG_OBJECT = null;
-
-                            break;
+                            return true;
                         case DragEvent.ACTION_DRAG_ENDED:
-                        default:
-                            break;
+                            return true;
                     }
-                    return true;
+                    return false;
                 }
             });
 

@@ -2,9 +2,6 @@ package com.example.volkov.taskviewpager.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Pavilion on 01.04.2015.
- */
 public class ListModel {
     private int id;
 

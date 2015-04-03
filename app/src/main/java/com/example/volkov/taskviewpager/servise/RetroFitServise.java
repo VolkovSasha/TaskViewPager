@@ -9,9 +9,6 @@ import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.Path;
 
-/**
- * Created by Pavilion on 01.04.2015.
- */
 public interface RetroFitServise {
 
     @Headers("Authorization: " + Constants.APP_TOKEN)

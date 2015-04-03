@@ -10,7 +10,6 @@ import com.example.volkov.taskviewpager.adapter.MyFragmentPagerAdapter;
 import com.example.volkov.taskviewpager.global.Constants;
 import com.example.volkov.taskviewpager.widget.OnSwipeListener;
 
-
 public class MainActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager       mPager;
@@ -79,4 +78,5 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int state) {
         titleChange();
     }
+
 }

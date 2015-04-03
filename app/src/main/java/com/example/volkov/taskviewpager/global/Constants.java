@@ -1,8 +1,5 @@
 package com.example.volkov.taskviewpager.global;
 
-/**
- * Created by Pavilion on 01.04.2015.
- */
 public class Constants {
 
     public static final String APP_TOKEN                = "Yy8ETJjPk6GmxHavIZyYkaXfAHukTibKMFs2BQlng8kgeYTZQxFHXpMrzMwHQlPo";

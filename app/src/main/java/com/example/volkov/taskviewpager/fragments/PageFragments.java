@@ -11,15 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.volkov.taskviewpager.R;
 import com.example.volkov.taskviewpager.StatePage;
 import com.example.volkov.taskviewpager.adapter.RecyclerViewAdapter;
 import com.example.volkov.taskviewpager.global.Constants;
-import com.example.volkov.taskviewpager.global.Variables;
 import com.example.volkov.taskviewpager.model.ListModel;
 import com.example.volkov.taskviewpager.servise.RetroFitServise;
 import com.example.volkov.taskviewpager.widget.OnSwipeListener;
@@ -34,8 +33,8 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
     private RecyclerView                mRV;
     private RecyclerView.LayoutManager  mLayoutManager;
     private Activity                    mActivity;
-    private int                       mScreenSize, mScreenSizeY;
-    private OnSwipeListener                 mSwipeListener = null;
+    private int                         mScreenSizeX, mScreenSizeY;
+    private OnSwipeListener             mSwipeListener = null;
 
     @Override
     public void onAttach(Activity activity) {
@@ -57,8 +56,8 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
         getAdapterService().getList(pageState.name().toLowerCase(), this);
     }
 
-    public void setOnSwipeListener(OnSwipeListener listener) {
-        mSwipeListener = listener;
+    public void setOnSwipeListener(OnSwipeListener _listener) {
+        mSwipeListener = _listener;
     }
 
     private RetroFitServise getAdapterService() {
@@ -75,10 +74,10 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
         mRV = (RecyclerView) mView.findViewById(R.id.my_recycler_view);
         mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         mRV.setLayoutManager(mLayoutManager);
-        Point mPoint        = new Point();
+        Point mPoint = new Point();
         mActivity.getWindowManager().getDefaultDisplay().getSize(mPoint);
-        mScreenSize         = mPoint.x;
-        mScreenSizeY        = mPoint.y;
+        mScreenSizeX            = mPoint.x;
+        mScreenSizeY            = mPoint.y;
         mRV.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
@@ -108,10 +107,10 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
     }
 
     private void checkX(float x) {
-        if(x > (mScreenSize * 0.8f) && x < mScreenSize) {
+        if(x > (mScreenSizeX * 0.8f) && x < mScreenSizeX) {
             if (mSwipeListener != null)
                 mSwipeListener.onSwipe(OnSwipeListener.SWIPE_RIGHT);
-        } else if(x < (mScreenSize * 0.2f) && x > 0) {
+        } else if(x < (mScreenSizeX * 0.2f) && x > 0) {
             if(mSwipeListener != null)
                 mSwipeListener.onSwipe(OnSwipeListener.SWIPE_LEFT);
         }
@@ -119,21 +118,20 @@ public class PageFragments extends Fragment implements Callback<List<ListModel>>
 
     private void checkY(float y){
         if (y > (mScreenSizeY * 0.7f) && y < mScreenSizeY){
-            mRV.smoothScrollBy(0, 200);
+            mRV.smoothScrollBy(0, 150);
         } else if (y < (mScreenSizeY * 0.3f) && y > 0)
-            mRV.smoothScrollBy(0, -200);
+            mRV.smoothScrollBy(0, -150);
     }
 
 
     @Override
     public void success(List<ListModel> listModels, Response response) {
-        mAdapter = new RecyclerViewAdapter(getActivity(), listModels);
-        mRV.setAdapter(mAdapter);
+            mAdapter = new RecyclerViewAdapter(getActivity(), listModels);
+            mRV.setAdapter(mAdapter);
     }
 
     @Override
     public void failure(RetrofitError error) {
 
     }
-
 }

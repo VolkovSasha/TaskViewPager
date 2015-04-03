@@ -1,8 +1,6 @@
 package com.example.volkov.taskviewpager.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.DragEvent;
@@ -16,7 +14,6 @@ import com.example.volkov.taskviewpager.R;
 import com.example.volkov.taskviewpager.global.Constants;
 import com.example.volkov.taskviewpager.global.Variables;
 import com.example.volkov.taskviewpager.model.ListModel;
-import com.example.volkov.taskviewpager.widget.OnSwipeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,9 +33,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup _viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup _viewGroup, int _position) {
         View view = LayoutInflater.from(_viewGroup.getContext()).inflate(R.layout.item_list_model, _viewGroup, false);
-        return new ViewHolder(view, mListModel.get(i));
+        return new ViewHolder(view, mListModel.get(_position));
     }
 
     @Override
